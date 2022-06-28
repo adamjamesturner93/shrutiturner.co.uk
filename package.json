@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
+    "@sanity/core": "^2.30.2",
     "@sanity/cli": "^2.30.2",
     "@sanity/types": "^2.29.5",
     "@types/node": "^17.0.41",
