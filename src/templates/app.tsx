@@ -15,13 +15,13 @@ export const AppTemplate = ({
       title="Shruti Turner"
       titleTemplate="Shruti Turner"
       defaultTitle="Shruti Turner"
-      description="An expert in research, having completed her PhD at Imperial College London, now a Data Science with a special interest in health care"
+      description="An expert in research, having completed her PhD at Imperial College London, now a machine learning engineer"
       canonical="https://shrutiturner.co.uk"
       openGraph={{
         url: 'https://shrutiturner.co.uk',
         title: 'Shruti Turner',
         description:
-          'An expert in research, having completed her PhD at Imperial College London, now a Data Science with a special interest in health care',
+          'An expert in research, having completed her PhD at Imperial College London, now a machine learning engineer',
         images: [
           {
             url: '/og.jpeg',
@@ -32,8 +32,8 @@ export const AppTemplate = ({
         ],
       }}
       twitter={{
-        handle: '@avneesh0612',
-        site: '@avneesh0612',
+        handle: '@shrutiturner',
+        site: '@shrutiturner',
         cardType: 'summary_large_image',
       }}
     />
