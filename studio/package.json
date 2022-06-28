@@ -12,6 +12,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/core": "^2.30.2",
     "@sanity/eslint-config-studio": "^2.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
