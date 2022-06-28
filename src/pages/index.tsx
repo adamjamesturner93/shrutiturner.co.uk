@@ -14,7 +14,7 @@ export default function Home() {
       </div>
       <figure className="relative aspect-square w-full mx-auto max-w-xs overflow-hidden md:max-w-md lg:max-w-lg">
         <Image
-          src="/profile.jpeg"
+          src="/shruti.jpeg"
           alt="Shruti Turner"
           layout="fill"
           className="object-contain"
