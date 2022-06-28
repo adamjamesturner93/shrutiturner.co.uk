@@ -9,7 +9,7 @@ export default function Home() {
           Hi, I&apos;m Shruti Turner
         </h1>
         <p className="text-center sm:text-lg sm:font-medium">
-          ML Engineer | Yogi | PhD
+          Machine Learning Engineer | PhD | Yogi
         </p>
       </div>
       <figure className="relative aspect-square w-full mx-auto max-w-xs overflow-hidden md:max-w-md lg:max-w-lg">
