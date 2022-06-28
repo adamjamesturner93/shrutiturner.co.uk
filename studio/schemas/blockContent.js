@@ -34,7 +34,6 @@ export default {
         // Decorators usually describe a single property – e.g. a typographic
         // preference or highlighting by editors.
         decorators: [
-          {title: 'Code', value: 'code'},
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
         ],
