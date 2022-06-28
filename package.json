@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "echo 'Building Sanity to public/studio' && cd studio && yarn && npx @sanity/cli build ../public/studio -y && echo 'Done'",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,8 +15,6 @@
     "@babel/preset-typescript": "^7.17.12",
     "@headlessui/react": "^1.6.4",
     "@portabletext/react": "^1.0.6",
-    "@sanity/client": "^3.3.2",
-    "@sanity/image-url": "^1.0.1",
     "autoprefixer": "^10.4.7",
     "clsx": "^1.1.1",
     "framer-motion": "^6.3.15",
