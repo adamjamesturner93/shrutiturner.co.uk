@@ -1,0 +1,28 @@
+{
+  "name": "shrutiturnercouk",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build public -y"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/eslint-config-studio": "^2.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "sanity": "dev-preview",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {},
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
+}
