@@ -4,11 +4,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "package.json",
-  "author": null,
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build ../public/studio -y"
   },
   "keywords": [
     "sanity"
