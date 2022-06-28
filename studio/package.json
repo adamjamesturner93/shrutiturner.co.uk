@@ -5,8 +5,8 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
-    "build": "sanity build public -y"
+    "start": "npx sanity start",
+    "build": "npx sanity build public -y"
   },
   "keywords": [
     "sanity"
