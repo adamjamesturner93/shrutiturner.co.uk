@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "shrutiturner.co.uk"
+    "name": "shrutiturner.co.uk",
+    "basePath": "/studio"
   },
   "api": {
     "projectId": "yyxa3go2",
@@ -15,9 +16,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
