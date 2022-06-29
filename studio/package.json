@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build ../public/studio -y"
+    "build": "sanity install && sanity build ../public/studio -y"
   },
   "keywords": [
     "sanity"
