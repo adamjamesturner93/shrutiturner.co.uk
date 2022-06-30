@@ -20,6 +20,8 @@ export default async function handler(
     return res.status(500).json({ message: 'Invalid setup' });
   }
 
+  return res.json({ message: JSON.stringify({ secret, req }) });
+
   if (!isValidRequest(req, secret)) {
     return res.status(401).json({ message: 'Invalid signature' });
   }
