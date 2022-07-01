@@ -4,8 +4,6 @@ type Data = {
   message: string;
 };
 
-// const secret = process.env.SANITY_WEBHOOK_SECRET;
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
