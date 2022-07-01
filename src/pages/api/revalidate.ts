@@ -15,19 +15,21 @@ export default async function handler(
     return res.status(401).json({ message: 'Must be a POST request' });
   }
 
-  if (!secret) {
-    return res.status(500).json({ message: 'Invalid setup' });
-  }
-
   try {
     const { body } = req;
-    const { _type } = body;
+    const { _type, slug } = body;
 
     switch (_type) {
       case 'landingPage':
         await res.revalidate(`/`);
         return res.json({
-          message: 'Revalidated ${_type}',
+          message: `Revalidated ${_type}`,
+        });
+      case 'post':
+        const { content } = slug;
+        await res.revalidate(`/blog/${content}`);
+        return res.json({
+          message: `Revalidated ${_type}`,
         });
     }
 
