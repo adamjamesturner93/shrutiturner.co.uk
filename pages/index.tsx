@@ -5,6 +5,7 @@ import Intro from '../components/intro';
 import { Layout } from '../components/layout';
 import { getAllPostsForHome } from '../lib/api';
 import Head from 'next/head';
+import { HOME_OG_IMAGE_URL } from '../lib/constants';
 
 function Index({ preview, allPosts }) {
   const heroPost = allPosts[0];
@@ -13,6 +14,7 @@ function Index({ preview, allPosts }) {
     <Layout preview={preview}>
       <Head>
         <title>Shruti Turner | Machine Learning Engineer</title>
+        <meta property="og:image" content={HOME_OG_IMAGE_URL} />
       </Head>
       <Container>
         <Intro />
