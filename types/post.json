@@ -34,14 +34,6 @@
         "label": "date"
       }
     },
-    "author": {
-      "type": "Link",
-      "config": {
-        "select": "document",
-        "customtypes": ["author"],
-        "label": "author"
-      }
-    },
     "uid": {
       "type": "UID",
       "config": {
