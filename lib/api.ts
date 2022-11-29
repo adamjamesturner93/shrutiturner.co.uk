@@ -1,3 +1,5 @@
+import { Post } from '../types/post';
+
 const POST_GRAPHQL_FIELDS = `
 slug
 title
@@ -6,6 +8,11 @@ coverImage {
 }
 date
 excerpt
+tagsCollection (limit: 5) {
+  items {
+    tag
+  }
+}
 content {
   json
   links {
@@ -41,11 +48,20 @@ async function fetchGraphQL(query, preview = false) {
 }
 
 function extractPost(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items?.[0];
+  const post = fetchResponse?.data?.postCollection?.items?.[0];
+  return {
+    ...post,
+    tagsCollection: post.tagsCollection?.items.map((item) => item.tag) || [],
+  };
 }
 
-function extractPostEntries(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items;
+function extractPostEntries(fetchResponse): Post[] {
+  const posts = fetchResponse?.data?.postCollection?.items;
+
+  return posts.map((post) => ({
+    ...post,
+    tagsCollection: post.tagsCollection?.items.map((item) => item.tag) || [],
+  }));
 }
 
 export async function getPreviewPostBySlug(slug) {
@@ -86,6 +102,7 @@ export async function getAllPostsForHome(preview) {
     }`,
     preview,
   );
+
   return extractPostEntries(entries);
 }
 

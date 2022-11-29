@@ -54,6 +54,7 @@ export default function PostPage({
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
+                tags={post.tagsCollection}
               />
               <PostBody content={post.content} />
               <PostShare slug={post.slug} />

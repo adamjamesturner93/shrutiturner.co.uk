@@ -10,6 +10,8 @@ import { HOME_OG_IMAGE_URL } from '../lib/constants';
 function Index({ preview, allPosts }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
+  console.log(allPosts);
+
   return (
     <Layout preview={preview}>
       <Head>
@@ -18,15 +20,7 @@ function Index({ preview, allPosts }) {
       </Head>
       <Container>
         <Intro />
-        {heroPost && (
-          <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.coverImage}
-            date={heroPost.date}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
-          />
-        )}
+        {heroPost && <HeroPost {...heroPost} />}
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
       </Container>
     </Layout>
@@ -35,6 +29,7 @@ function Index({ preview, allPosts }) {
 
 export async function getStaticProps({ preview = false }) {
   const allPosts = (await getAllPostsForHome(preview)) ?? [];
+
   return {
     props: { preview, allPosts },
   };
