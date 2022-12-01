@@ -12,6 +12,7 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api';
 import PostTitle from '../../components/post-title';
 import PostShare from '../../components/post-share';
 import { Post } from '../../types/post';
+import { DiscussionEmbed } from 'disqus-react';
 
 export default function PostPage({
   post,
@@ -23,6 +24,13 @@ export default function PostPage({
   preview: boolean;
 }) {
   const router = useRouter();
+
+  const disqusShortname = 'shrutis-blog';
+  const disqusConfig = {
+    url: `https://shrutiturner.co.uk/posts/${post.slug}`,
+    identifier: post.slug, // Single post slug
+    title: post.title, // Single post title
+  };
 
   if (!router.isFallback && !post) {
     return <ErrorPage statusCode={404} />;
@@ -59,6 +67,13 @@ export default function PostPage({
               <PostBody content={post.content} />
               <PostShare slug={post.slug} />
             </article>
+            <SectionSeparator />
+            <div>
+              <DiscussionEmbed
+                shortname={disqusShortname}
+                config={disqusConfig}
+              />
+            </div>
             <SectionSeparator />
             {morePosts && morePosts.length > 0 && (
               <MoreStories posts={morePosts} />
