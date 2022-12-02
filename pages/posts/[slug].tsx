@@ -27,9 +27,9 @@ export default function PostPage({
 
   const disqusShortname = 'shrutis-blog';
   const disqusConfig = {
-    url: `https://shrutiturner.co.uk/posts/${post.slug}`,
-    identifier: post.slug, // Single post slug
-    title: post.title, // Single post title
+    url: `https://shrutiturner.co.uk/posts/${post?.slug}`,
+    identifier: post?.slug, // Single post slug
+    title: post?.title, // Single post title
   };
 
   if (!router.isFallback && !post) {
@@ -99,6 +99,7 @@ export async function getStaticProps({ params, preview = false }) {
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
+  console.log('allPosts', allPosts);
   return {
     paths: allPosts?.map(({ slug }) => `/posts/${slug}`) ?? [],
     fallback: true,
