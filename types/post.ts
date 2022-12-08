@@ -7,5 +7,6 @@ export type Post = {
     url: string;
   };
   content: any;
+  photoCredit?: any;
   tagsCollection: string[];
 };

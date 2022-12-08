@@ -3,7 +3,7 @@ import CoverImage from '../components/cover-image';
 import PostTitle from '../components/post-title';
 import Tags from './tags';
 
-export default function PostHeader({ title, coverImage, date, tags }) {
+export default function PostHeader({ title, coverImage, date, tags, caption }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -12,7 +12,12 @@ export default function PostHeader({ title, coverImage, date, tags }) {
       </div>
       <div className="hidden md:block md:mb-12"></div>
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} url={coverImage.url} />
+        <CoverImage
+          className="max-h-[70vh]"
+          title={title}
+          url={coverImage.url}
+          caption={caption}
+        />
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="block md:hidden mb-6"></div>

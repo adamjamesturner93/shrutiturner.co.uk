@@ -36,6 +36,8 @@ export default function PostPage({
     return <ErrorPage statusCode={404} />;
   }
 
+  console.log(post);
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -63,6 +65,7 @@ export default function PostPage({
                 coverImage={post.coverImage}
                 date={post.date}
                 tags={post.tagsCollection}
+                caption={post.photoCredit}
               />
               <PostBody content={post.content} />
               <PostShare slug={post.slug} />
@@ -99,7 +102,6 @@ export async function getStaticProps({ params, preview = false }) {
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
-  console.log('allPosts', allPosts);
   return {
     paths: allPosts?.map(({ slug }) => `/posts/${slug}`) ?? [],
     fallback: true,

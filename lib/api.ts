@@ -27,6 +27,9 @@ content {
     }
   }
 }
+photoCredit {
+  json
+}
 `;
 
 async function fetchGraphQL(query, preview = false) {
@@ -57,6 +60,8 @@ function extractPost(fetchResponse) {
 
 function extractPostEntries(fetchResponse): Post[] {
   const posts = fetchResponse?.data?.postCollection?.items;
+
+  console.log(posts);
 
   return posts.map((post) => ({
     ...post,

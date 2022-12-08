@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import DateComponent from '../components/date';
+import { Post } from '../types/post';
 import CoverImage from './cover-image';
 import TagsComponent from './tags';
 
@@ -10,11 +11,16 @@ export default function PostPreview({
   excerpt,
   tagsCollection,
   slug,
-}) {
+}: Post) {
   return (
     <article>
       <div className="mb-5">
-        <CoverImage title={title} slug={slug} url={coverImage.url} />
+        <CoverImage
+          title={title}
+          slug={slug}
+          url={coverImage.url}
+          className="max-h-[30vh]"
+        />
       </div>
       <div className="flex justify-between items-center">
         <h2 className="text-3xl mb-3 leading-snug">

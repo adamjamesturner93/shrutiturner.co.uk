@@ -26,3 +26,11 @@ export default function PostBody({ content }) {
     </div>
   );
 }
+
+export function PostCaption({ content }) {
+  return (
+    <figcaption className="text-center ">
+      {documentToReactComponents(content?.json, customMarkdownOptions(content))}
+    </figcaption>
+  );
+}
