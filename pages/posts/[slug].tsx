@@ -10,10 +10,27 @@ import SectionSeparator from '../../components/section-separator';
 import { Layout } from '../../components/layout';
 import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api';
 import PostTitle from '../../components/post-title';
-import { CMS_NAME } from '../../lib/constants';
+import PostShare from '../../components/post-share';
+import { Post } from '../../types/post';
+import { DiscussionEmbed } from 'disqus-react';
 
-export default function Post({ post, morePosts, preview }) {
+export default function PostPage({
+  post,
+  morePosts,
+  preview,
+}: {
+  post: Post;
+  morePosts?: Post[];
+  preview: boolean;
+}) {
   const router = useRouter();
+
+  const disqusShortname = 'shrutis-blog';
+  const disqusConfig = {
+    url: `https://shrutiturner.co.uk/posts/${post?.slug}`,
+    identifier: post?.slug, // Single post slug
+    title: post?.title, // Single post title
+  };
 
   if (!router.isFallback && !post) {
     return <ErrorPage statusCode={404} />;
@@ -29,19 +46,35 @@ export default function Post({ post, morePosts, preview }) {
           <>
             <article>
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{post.title} | Shruti Turner</title>
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.excerpt} />
                 <meta property="og:image" content={post.coverImage.url} />
+                <meta property="og:type" content="article" />
+                <meta property="og:locale" content="en_GB" />
+
+                <meta
+                  property="og:url"
+                  content={`https://shrutiturner.co.uk${router.asPath}`}
+                />
               </Head>
               <PostHeader
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
-                author={post.author}
+                tags={post.tagsCollection}
+                caption={post.photoCredit}
               />
               <PostBody content={post.content} />
+              <PostShare slug={post.slug} />
             </article>
+            <SectionSeparator />
+            <div>
+              <DiscussionEmbed
+                shortname={disqusShortname}
+                config={disqusConfig}
+              />
+            </div>
             <SectionSeparator />
             {morePosts && morePosts.length > 0 && (
               <MoreStories posts={morePosts} />
