@@ -4,7 +4,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint ."
+    "lint": "next lint .",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.4.0",
@@ -16,6 +17,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.28.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
