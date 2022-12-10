@@ -61,8 +61,6 @@ function extractPost(fetchResponse) {
 function extractPostEntries(fetchResponse): Post[] {
   const posts = fetchResponse?.data?.postCollection?.items;
 
-  console.log(posts);
-
   return posts.map((post) => ({
     ...post,
     tagsCollection: post.tagsCollection?.items.map((item) => item.tag) || [],

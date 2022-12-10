@@ -10,7 +10,6 @@ import { HOME_OG_IMAGE_URL } from '../lib/constants';
 function Index({ preview, allPosts }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
-  console.log(allPosts);
 
   return (
     <Layout preview={preview}>

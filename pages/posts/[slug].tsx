@@ -36,8 +36,6 @@ export default function PostPage({
     return <ErrorPage statusCode={404} />;
   }
 
-  console.log(post);
-
   return (
     <Layout preview={preview}>
       <Container>
