@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const postSlug = req.body.fields.slug['en-US'];
+    const postSlug = req.body.fields.slug['en-GB'];
 
     // revalidate the individual post and the home page
     await res.revalidate(`/posts/${postSlug}`);
@@ -24,6 +24,6 @@ export default async function handler(req, res) {
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
-    return res.status(500).send('Error revalidating');
+    return res.status(500).send('Error revalidating', err.message);
   }
 }
