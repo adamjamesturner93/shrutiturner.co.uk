@@ -2,6 +2,7 @@ import DateComponent from '../components/date';
 import CoverImage from '../components/cover-image';
 import PostTitle from '../components/post-title';
 import Tags from './tags';
+import Block from './block';
 
 export default function PostHeader({ title, coverImage, date, tags, caption }) {
   return (
@@ -19,12 +20,12 @@ export default function PostHeader({ title, coverImage, date, tags, caption }) {
           caption={caption}
         />
       </div>
-      <div className="max-w-2xl mx-auto">
+      <Block>
         <div className="block md:hidden mb-6"></div>
         <div className="mb-6">
           <DateComponent dateString={date} />
         </div>
-      </div>
+      </Block>
     </>
   );
 }
