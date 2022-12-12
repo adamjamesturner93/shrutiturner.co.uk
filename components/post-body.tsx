@@ -1,5 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import Block from './block';
 import markdownStyles from './markdown-styles.module.scss';
 import RichTextAsset from './rich-text-asset';
 
@@ -16,14 +17,14 @@ const customMarkdownOptions = (content) => ({
 
 export default function PostBody({ content }) {
   return (
-    <div className="max-w-2xl mx-auto">
+    <Block>
       <div className={markdownStyles['markdown']}>
         {documentToReactComponents(
           content.json,
           customMarkdownOptions(content),
         )}
       </div>
-    </div>
+    </Block>
   );
 }
 
