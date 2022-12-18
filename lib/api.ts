@@ -23,6 +23,7 @@ content {
         }
         url
         description
+        title
       }
     }
   }

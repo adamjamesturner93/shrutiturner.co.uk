@@ -8,7 +8,7 @@ function Tag({ children }) {
 
 export default function TagsComponent({ tags }) {
   return (
-    <div className="flex gap-2 text-sm">
+    <div className="flex flex-wrap gap-2 text-sm mb-4">
       {tags.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
