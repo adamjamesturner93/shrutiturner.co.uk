@@ -28,9 +28,8 @@ export default function PostPreview({
             {title}
           </Link>
         </h2>
-
-        <TagsComponent tags={tagsCollection} />
       </div>
+      <TagsComponent tags={tagsCollection} />
       <div className="mb-4">
         <DateComponent dateString={date} />
       </div>
