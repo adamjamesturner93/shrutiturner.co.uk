@@ -4,25 +4,52 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
-article ul {
-  list-style-type: disc;
-  margin-left: 1rem;
+#id {
+  article ul {
+    list-style-type: disc;
+    margin-left: 1rem;
+  }
+
+  article ol {
+    list-style-type: decimal;
+    margin-left: 1rem;
+  }
+
+  article li {
+    padding-left: 1rem;
+  }
+
+  article a {
+    text-decoration: underline;
+  }
 }
 
-article ol {
-  list-style-type: decimal;
-  margin-left: 1rem;
+a {
+  &:hover {
+    color: #8f00ff;
+  }
 }
 
-article li {
-  padding-left: 1rem;
-}
+#table-of-contents {
+  font-size: large;
+  ol {
+    counter-reset: item;
+  }
 
-article a {
-  text-decoration: underline;
-}
+  li {
+    display: block;
 
-article a:hover,
-footer a:hover {
-  color: #8f00ff;
+    a {
+      padding-left: 1em;
+    }
+
+    ol {
+      margin-left: 2em;
+    }
+  }
+
+  li:before {
+    content: counters(item, '.') '. ';
+    counter-increment: item;
+  }
 }

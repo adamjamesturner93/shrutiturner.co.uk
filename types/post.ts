@@ -1,3 +1,5 @@
+import { Document } from '@contentful/rich-text-types';
+
 export type Post = {
   title: string;
   date: Date;
@@ -6,7 +8,10 @@ export type Post = {
   coverImage: {
     url: string;
   };
-  content: any;
+  content: {
+    json: Document;
+    links: { assets: { block: any[] } };
+  };
   photoCredit?: any;
   tagsCollection: string[];
 };
