@@ -1,38 +1,62 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import {
+  documentToReactComponents,
+  Options,
+} from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import { Post } from '../types/post';
 import Block from './block';
 import markdownStyles from './markdown-styles.module.scss';
 import { TableOfContents } from './post-toc';
 import RichTextAsset from './rich-text-asset';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-const customMarkdownOptions = (content: Post['content']) => ({
-  renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node) => (
-      <RichTextAsset
-        id={node.data.target.sys.id}
-        assets={content.links.assets.block}
-      />
-    ),
-    [BLOCKS.HEADING_2]: (node, children) => {
-      return <h2 id={children}>{children}</h2>;
+function customMarkdownOptions(content: Post['content']): Options {
+  return {
+    renderMark: {
+      [MARKS.CODE]: (text: string) => {
+        if (text.indexOf('$') !== 0)
+          return <code className="text-orange-700">{text}</code>;
+        return (
+          <SyntaxHighlighter
+            language="bash"
+            style={a11yDark}
+            wrapLongLines
+            PreTag="span"
+            customStyle={{ display: 'flex' }}
+          >
+            {text}
+          </SyntaxHighlighter>
+        );
+      },
     },
-    [BLOCKS.HEADING_3]: (node, children) => {
-      return (
-        <h3 id={children} className="italic">
-          {children}
-        </h3>
-      );
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => (
+        <RichTextAsset
+          id={node.data.target.sys.id}
+          assets={content.links.assets.block}
+        />
+      ),
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return <h2 id={children as string}>{children}</h2>;
+      },
+      [BLOCKS.HEADING_3]: (node, children) => {
+        return (
+          <h3 id={children as string} className="italic">
+            {children}
+          </h3>
+        );
+      },
+      [BLOCKS.HEADING_4]: (node, children) => {
+        return (
+          <h4 className="italic" id={children as string}>
+            {children}
+          </h4>
+        );
+      },
     },
-    [BLOCKS.HEADING_4]: (node, children) => {
-      return (
-        <h4 className="italic" id={children}>
-          {children}
-        </h4>
-      );
-    },
-  },
-});
+  };
+}
 
 export default function PostBody({ content }: { content: Post['content'] }) {
   return (
