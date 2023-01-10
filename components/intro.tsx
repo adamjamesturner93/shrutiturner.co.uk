@@ -5,7 +5,7 @@ export default function Intro() {
         Shruti Turner
       </h1>
       <p className="text-center md:text-left text-xl mt-5 md:pl-8">
-        A blog about my journey as a Machine Learning Engineer
+        Learnings from my journey as a Machine Learning Engineer
       </p>
     </section>
   );
