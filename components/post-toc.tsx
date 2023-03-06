@@ -13,6 +13,8 @@ export function TableOfContents({ content }: { content: Post['markdown'] }) {
   const regXHeader = /#{1,6}.+/g;
   const titles = markdownWithoutCodeBlocks.match(regXHeader);
 
+  if (!titles) return;
+
   let globalID = 0;
 
   const toc = [];
@@ -23,9 +25,9 @@ export function TableOfContents({ content }: { content: Post['markdown'] }) {
     level === 1 ? (globalID += 1) : globalID;
 
     toc.push({
-      level: level,
-      title: title,
-      anchor: anchor,
+      level,
+      title,
+      anchor,
     });
   });
 
@@ -49,7 +51,6 @@ export function TableOfContents({ content }: { content: Post['markdown'] }) {
   }, {});
 
   const tocEntries = Object.entries(orderedHeadings);
-  if (tocEntries.length === 0) return;
 
   return (
     <nav title="table-of-contents" id="table-of-contents" className="text-lg">
