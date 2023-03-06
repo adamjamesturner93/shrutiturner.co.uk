@@ -5,7 +5,7 @@ import { TwitterIcon } from './icons/twitter';
 
 export default function PostShare({ slug }: { slug: string }) {
   return (
-    <div className="max-w-2xl mx-auto flex flex-col items-end mt-16">
+    <div className="max-w-2xl xl:max-w-3xl 2xl:max-w-7xl mx-auto flex flex-col items-end mt-16">
       <h2 className="font-bold text-lg">Share Now</h2>
       <div className="flex gap-4">
         <Link

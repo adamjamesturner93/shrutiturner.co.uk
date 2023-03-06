@@ -4,7 +4,7 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
-#id {
+#content {
   article ul {
     list-style-type: disc;
     margin-left: 1rem;
@@ -31,21 +31,8 @@ a {
 }
 
 #table-of-contents {
-  font-size: large;
   ol {
     counter-reset: item;
-  }
-
-  li {
-    display: block;
-
-    a {
-      padding-left: 1em;
-    }
-
-    ol {
-      margin-left: 2em;
-    }
   }
 
   li:before {

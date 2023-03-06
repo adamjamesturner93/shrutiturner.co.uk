@@ -1,62 +1,81 @@
 import React from 'react';
-import { BLOCKS } from '@contentful/rich-text-types';
 import { Post } from '../types/post';
 
-const HEADERS = [BLOCKS.HEADING_2, BLOCKS.HEADING_3, BLOCKS.HEADING_4];
+export function TableOfContents({ content }: { content: Post['markdown'] }) {
+  const regexReplaceCode = /(```.+?```)/gms;
+  const regexRemoveLinks = /\[(.*?)\]\(.*?\)/g;
 
-export function TableOfContents({ content }: { content: Post['content'] }) {
-  const headings = content.json.content.filter(({ nodeType }) =>
-    HEADERS.find((x) => x === nodeType),
+  const markdownWithoutLinks = content.replace(regexRemoveLinks, '');
+  const markdownWithoutCodeBlocks = markdownWithoutLinks.replace(
+    regexReplaceCode,
+    '',
   );
+  const regXHeader = /#{1,6}.+/g;
+  const titles = markdownWithoutCodeBlocks.match(regXHeader);
 
-  const orderedHeadings = headings.reduce<Record<string, string[]>>(
-    (acc, cur) => {
-      if (cur.nodeType === BLOCKS.HEADING_2) {
-        return {
-          ...acc,
-          [(cur.content[0] as any).value]: [],
-        };
-      }
+  let globalID = 0;
 
-      const currentHeading = Object.keys(acc).pop();
-      const newHeading = {
-        [currentHeading]: [
-          ...acc[currentHeading],
-          (cur.content[0] as any).value,
-        ],
-      };
+  const toc = [];
+  titles.map((tempTitle) => {
+    const level = tempTitle.match(/#/g).length - 1;
+    const title = tempTitle.replace(/#/g, '').trim();
+    const anchor = `#${title.replace(/ /g, '-').toLowerCase()}`;
+    level === 1 ? (globalID += 1) : globalID;
 
+    toc.push({
+      level: level,
+      title: title,
+      anchor: anchor,
+    });
+  });
+
+  const orderedHeadings = toc.reduce<Record<string, string[]>>((acc, cur) => {
+    if (cur.level === 1) {
       return {
         ...acc,
-        ...newHeading,
+        [cur.title]: [],
       };
-    },
-    {},
-  );
+    }
+
+    const currentHeading = Object.keys(acc).pop();
+    const newHeading = {
+      [currentHeading]: [...acc[currentHeading], cur.title],
+    };
+
+    return {
+      ...acc,
+      ...newHeading,
+    };
+  }, {});
 
   const tocEntries = Object.entries(orderedHeadings);
-
   if (tocEntries.length === 0) return;
 
   return (
-    <nav title="table-of-contents" id="table-of-contents">
+    <nav title="table-of-contents" id="table-of-contents" className="text-lg">
       <h2 className="font-bold">Table of contents</h2>
       <ol className="toc-menu">
         {tocEntries.map(([h2, h3s]) => {
           if (h3s.length === 0) {
             return (
-              <li key={h2}>
-                <a href={`#${h2}`}>{h2}</a>
+              <li key={h2} className="block">
+                <a className="pl-4" href={`#${h2}`}>
+                  {h2}
+                </a>
               </li>
             );
           }
           return (
-            <li key={h2}>
-              <a href={`#${h2}`}>{h2}</a>
-              <ol>
+            <li key={h2} className="block ">
+              <a className="pl-4" href={`#${h2}`}>
+                {h2}
+              </a>
+              <ol className="ml-8">
                 {h3s.map((h3) => (
                   <li key={h3}>
-                    <a href={`#${h3}`}>{h3}</a>
+                    <a className="pl-4" href={`#${h3}`}>
+                      {h3}
+                    </a>
                   </li>
                 ))}
               </ol>
@@ -67,3 +86,5 @@ export function TableOfContents({ content }: { content: Post['content'] }) {
     </nav>
   );
 }
+
+export default TableOfContents;
