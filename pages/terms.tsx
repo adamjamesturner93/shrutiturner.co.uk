@@ -12,7 +12,7 @@ function Index({ preview }) {
       <Container>
         <Header />
         <h1 className="mb-4 text-6xl">Terms of use</h1>
-        <h3 className="mb-4 text-2xl lg:text-3xl leading-tight">Blog</h3>
+        <h2 className="mb-4 text-2xl lg:text-3xl leading-tight">Blog</h2>
         <p>
           This is a personal blog. Any views or opinions represented in this
           blog are personal and belong solely to the blog owner and do not
@@ -40,9 +40,9 @@ function Index({ preview }) {
           display or use of this information.
         </p>
 
-        <h3 className="mb-4 text-2xl lg:text-3xl leading-tight">
+        <h2 className="mb-4 text-2xl lg:text-3xl leading-tight">
           Downloadable Files and Images
-        </h3>
+        </h2>
 
         <p>
           Any downloadable file, including but not limited to pdfs, docs, jpegs,
