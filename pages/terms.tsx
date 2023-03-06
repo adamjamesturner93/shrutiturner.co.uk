@@ -7,7 +7,7 @@ function Index({ preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>Terms of Use</title>
+        <title>Terms of Use | Shruti Turner</title>
       </Head>
       <Container>
         <Header />
