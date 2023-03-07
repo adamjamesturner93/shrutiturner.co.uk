@@ -1,72 +1,55 @@
-import {
-  documentToReactComponents,
-  Options,
-} from '@contentful/rich-text-react-renderer';
-import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Post } from '../types/post';
 import Block from './block';
 import markdownStyles from './markdown-styles.module.scss';
 import { TableOfContents } from './post-toc';
-import RichTextAsset from './rich-text-asset';
+import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-function customMarkdownOptions(content: Post['content']): Options {
-  return {
-    renderMark: {
-      [MARKS.CODE]: (text: string) => {
-        if (text.indexOf('$') !== 0)
-          return <code className="text-orange-700">{text}</code>;
-        return (
-          <SyntaxHighlighter
-            language="bash"
-            style={a11yDark}
-            wrapLongLines
-            PreTag="span"
-            customStyle={{ display: 'flex' }}
-          >
-            {text}
-          </SyntaxHighlighter>
-        );
-      },
-    },
-    renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node) => (
-        <RichTextAsset
-          id={node.data.target.sys.id}
-          assets={content.links.assets.block}
-        />
-      ),
-      [BLOCKS.HEADING_2]: (node, children) => {
-        return <h2 id={children as string}>{children}</h2>;
-      },
-      [BLOCKS.HEADING_3]: (node, children) => {
-        return (
-          <h3 id={children as string} className="italic">
-            {children}
-          </h3>
-        );
-      },
-      [BLOCKS.HEADING_4]: (node, children) => {
-        return (
-          <h4 className="italic" id={children as string}>
-            {children}
-          </h4>
-        );
-      },
-    },
-  };
-}
-
-export default function PostBody({ content }: { content: Post['content'] }) {
+export default function PostBody({ content }: { content: Post['markdown'] }) {
   return (
     <Block>
       <TableOfContents content={content} />
       <div id="content" className={markdownStyles['markdown']}>
-        {documentToReactComponents(
-          content.json,
-          customMarkdownOptions(content),
-        )}
+        <ReactMarkdown
+          components={{
+            h2({ children, ...props }) {
+              return (
+                <h2 id={children as string} {...props}>
+                  {children}
+                </h2>
+              );
+            },
+            h3({ children, ...props }) {
+              return (
+                <h3 id={children as string} {...props}>
+                  {children}
+                </h3>
+              );
+            },
+            code({ inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || '');
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={coldarkDark as any}
+                  language={match[1]}
+                  wrapLongLines
+                  PreTag="div"
+                  {...props}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {content}
+        </ReactMarkdown>
       </div>
     </Block>
   );
@@ -75,7 +58,7 @@ export default function PostBody({ content }: { content: Post['content'] }) {
 export function PostCaption({ content }) {
   return (
     <figcaption className="text-center ">
-      {documentToReactComponents(content?.json, customMarkdownOptions(content))}
+      {documentToReactComponents(content?.json)}
     </figcaption>
   );
 }

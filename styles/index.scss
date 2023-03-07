@@ -31,21 +31,8 @@ a {
 }
 
 #table-of-contents {
-  font-size: large;
   ol {
     counter-reset: item;
-  }
-
-  li {
-    display: block;
-
-    a {
-      padding-left: 1em;
-    }
-
-    ol {
-      margin-left: 2em;
-    }
   }
 
   li:before {

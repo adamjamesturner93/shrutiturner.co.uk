@@ -1,37 +1,22 @@
 import { Post } from '../types/post';
 
 const POST_GRAPHQL_FIELDS = `
-slug
-title
-coverImage {
-  url
-}
-date
-excerpt
-tagsCollection (limit: 5) {
-  items {
-    tag
-  }
-}
-content {
-  json
-  links {
-    assets {
-      block {
-        sys {
-          id
-        }
+      slug
+      title
+      coverImage {
         url
-        description
-        title
       }
-    }
-  }
-}
-photoCredit {
-  json
-}
-`;
+      date
+      excerpt
+      tagsCollection(limit: 5) {
+        items {
+          tag
+        }
+      }
+      markdown
+      photoCredit {
+        json
+      }`;
 
 async function fetchGraphQL(query, preview = false) {
   return fetch(

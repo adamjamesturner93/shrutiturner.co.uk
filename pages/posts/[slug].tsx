@@ -13,7 +13,6 @@ import PostTitle from '../../components/post-title';
 import PostShare from '../../components/post-share';
 import { Post } from '../../types/post';
 import { DiscussionEmbed } from 'disqus-react';
-import { TableOfContents } from '../../components/post-toc';
 
 export default function PostPage({
   post,
@@ -66,7 +65,7 @@ export default function PostPage({
                 tags={post.tagsCollection}
                 caption={post.photoCredit}
               />
-              <PostBody content={post.content} />
+              <PostBody content={post.markdown} />
               <PostShare slug={post.slug} />
             </article>
             <SectionSeparator />
